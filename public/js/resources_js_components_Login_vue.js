@@ -36,10 +36,12 @@ __webpack_require__.r(__webpack_exports__);
           email: _this.email,
           password: _this.password
         }).then(function (res) {
-          console.log(res);
-        })["catch"](function (err) {
-          console.log(err.response);
-        });
+          localStorage.setItem('x_xsrf-token', res.config.headers['X-XSRF-TOKEN']);
+
+          _this.$router.push({
+            name: 'user.personal'
+          });
+        })["catch"](function (err) {});
       });
     }
   }
@@ -141,7 +143,7 @@ var render = function () {
           expression: "email",
         },
       ],
-      staticClass: "form-control",
+      staticClass: "form-control mt-3 mb-3",
       attrs: { type: "email", placeholder: "Email" },
       domProps: { value: _vm.email },
       on: {
@@ -163,7 +165,7 @@ var render = function () {
           expression: "password",
         },
       ],
-      staticClass: "form-control",
+      staticClass: "form-control mb-3",
       attrs: { type: "password", placeholder: "Password" },
       domProps: { value: _vm.password },
       on: {
